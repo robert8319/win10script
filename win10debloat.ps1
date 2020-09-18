@@ -1879,7 +1879,7 @@ Function EnableThumbsDB {
 ##########
 
 # Disable OneDrive
-Function DisableOneDrive {
+# Function DisableOneDrive {
 	Write-Output "Disabling OneDrive..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
@@ -1887,14 +1887,14 @@ Function DisableOneDrive {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
 }
 
-# Enable OneDrive
+Enable OneDrive
 Function EnableOneDrive {
 	Write-Output "Enabling OneDrive..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
 }
 
 # Uninstall OneDrive - Not applicable to Server
-Function UninstallOneDrive {
+# Function UninstallOneDrive {
 	Write-Output "Uninstalling OneDrive..."
 	Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
 	Start-Sleep -s 2
@@ -1918,7 +1918,7 @@ Function UninstallOneDrive {
 }
 
 # Install OneDrive - Not applicable to Server
-Function InstallOneDrive {
+# Function InstallOneDrive {
 	Write-Output "Installing OneDrive..."
 	$onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
 	If (!(Test-Path $onedrive)) {
@@ -1971,7 +1971,7 @@ Function UninstallMsftBloat {
 }
 
 # Install default Microsoft applications
-Function InstallMsftBloat {
+# Function InstallMsftBloat {
 	Write-Output "Installing default Microsoft applications..."
 	Get-AppxPackage -AllUsers "Microsoft.3DBuilder" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 	Get-AppxPackage -AllUsers "Microsoft.AppConnector" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
@@ -2054,7 +2054,7 @@ function UninstallThirdPartyBloat {
 }
 
 # Install default third party applications
-Function InstallThirdPartyBloat {
+#Function InstallThirdPartyBloat {
 	Write-Output "Installing default third party applications..."
 	Get-AppxPackage -AllUsers "2414FC7A.Viber" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 	Get-AppxPackage -AllUsers "41038Axilesoft.ACGMediaPlayer" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
@@ -2117,7 +2117,7 @@ Function DisableXboxFeatures {
 }
 
 # Enable Xbox features
-Function EnableXboxFeatures {
+# Function EnableXboxFeatures {
 	Write-Output "Enabling Xbox features..."
 	Get-AppxPackage -AllUsers "Microsoft.XboxApp" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 	Get-AppxPackage -AllUsers "Microsoft.XboxIdentityProvider" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
@@ -2142,7 +2142,7 @@ Function DisableAdobeFlash {
 }
 
 # Enable built-in Adobe Flash in IE and Edge
-Function EnableAdobeFlash {
+# Function EnableAdobeFlash {
 	Write-Output "Enabling built-in Adobe Flash in IE and Edge..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" -Name "DisableFlashInIE" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Addons" -Name "FlashPlayerEnabled" -ErrorAction SilentlyContinue
@@ -2155,7 +2155,7 @@ Function UninstallMediaPlayer {
 }
 
 # Install Windows Media Player
-Function InstallMediaPlayer {
+# Function InstallMediaPlayer {
 	Write-Output "Installing Windows Media Player..."
 	Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 }
@@ -2167,7 +2167,7 @@ Function UninstallInternetExplorer {
 }
 
 # Install Internet Explorer
-Function InstallInternetExplorer {
+# Function InstallInternetExplorer {
 	Write-Output "Installing Internet Explorer..."
 	Enable-WindowsOptionalFeature -Online -FeatureName "Internet-Explorer-Optional-$env:PROCESSOR_ARCHITECTURE" -NoRestart -WarningAction SilentlyContinue | Out-Null
 }
@@ -2179,7 +2179,7 @@ Function UninstallWorkFolders {
 }
 
 # Install Work Folders Client - Not applicable to Server
-Function InstallWorkFolders {
+# Function InstallWorkFolders {
 	Write-Output "Installing Work Folders Client..."
 	Enable-WindowsOptionalFeature -Online -FeatureName "WorkFolders-Client" -NoRestart -WarningAction SilentlyContinue | Out-Null
 }
